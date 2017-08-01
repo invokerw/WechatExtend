@@ -5,7 +5,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf8")
 
-KEY = '8edce3ce905a4c1dbb965e6b35c3834d'
+KEY = '2b76b9f122b44d978a11c459e4b1e4dd'#'8edce3ce905a4c1dbb965e6b35c3834d'
 
 def get_response(msg):
     apiUrl = 'http://www.tuling123.com/openapi/api'
