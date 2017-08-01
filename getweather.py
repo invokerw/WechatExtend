@@ -9,26 +9,43 @@ reload(sys)
 sys.setdefaultencoding("utf8")
 
 def get_today_weather(placeCode):
-    url = u'http://wthrcdn.etouch.cn/weather_mini?citykey=' + str(placeCode)
-	
-    try:
-        jsonStr = requests.get(url).text
-        data = json.loads(jsonStr.encode('utf-8'))
-        weather = data['data']
-        return weather
-    except:
-        return
+	url = u'http://wthrcdn.etouch.cn/weather_mini?citykey=' + str(placeCode)
+	try:
+		jsonStr = requests.get(url).text
+		data = json.loads(jsonStr.encode('utf-8'))
+		weather = data['data']
+		return weather
+	except:
+		return
+
+def get_weather(placeCode):
+	weather = get_today_weather(placeCode)
+	retStr = weather["city"].encode('utf-8')+": "
+	x = weather["forecast"][0]
+	retStr = retStr + x["date"].encode('utf-8')+", "+\
+		x["type"].encode('utf-8')+", "+\
+		x["high"].encode('utf-8')+", "+\
+		x["low"].encode('utf-8')+", "+\
+		x["fengxiang"].encode('utf-8')+", "+\
+		x["fengli"].encode('utf-8')+". "
+	retStr = retStr + weather["ganmao"].encode('utf-8')
+	return retStr
+
 # 101010100 北京 
 # 101020100 上海 
 # 101030100 天津 
 def main():
-    weather = get_today_weather(101010100)
-    print("city:" + weather["city"])
-    print("prompt:"+weather["ganmao"])
-    for x in weather["forecast"]:
-        print(x["date"]+" "+x["type"]+" "+x["high"]+" "+
-			x["low"]+" "+x["fengxiang"]+" "+x["fengli"])
-
+	weather = get_today_weather(101010100)
+	print("city:" + weather["city"].encode('utf-8'))
+	print("prompt:"+weather["ganmao"].encode('utf-8'))
+	for x in weather["forecast"]:
+		print(x["date"].encode('utf-8')+" "+
+			x["type"].encode('utf-8')+" "+
+			x["high"].encode('utf-8')+" "+
+			x["low"].encode('utf-8')+" "+
+			x["fengxiang"].encode('utf-8')+" "+
+			x["fengli"].encode('utf-8'))
+	print(get_weather(101010100))
 if __name__ == '__main__':
 	main()
 
