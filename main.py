@@ -20,21 +20,30 @@ def ret_chatroom(msg):
 	defaultReply = 'I received:'+msg['Text'].encode('utf-8')
 	if msg['Text'].encode('utf-8') == "天气":
 		reply = getweather.get_weather(101010100)
-		reply = reply + "......." +getweather.get_weather(101020100)
+		reply = reply + "...|..." +getweather.get_weather(101020100)
 		print('I say:'+reply)
 		return reply
-	elif msg['Text'].encode('utf-8') == "关闭聊天":
-		reply = '关闭聊天成功'
+	elif msg['Text'].encode('utf-8') == "关闭回复":
+		reply = '好的,我闭嘴'
 		chat = 0
 		return reply
-	elif msg['Text'].encode('utf-8') == "开启聊天":
-		reply = '开启聊天成功'
+	elif msg['Text'].encode('utf-8') == "提问模式":
+		reply = '切换至提问模式'
 		chat = 1
+		return reply
+	elif msg['Text'].encode('utf-8') == "开启聊天":
+		reply = '切换至聊天模式'
+		chat = 2
 		return reply
 	else:
 		if chat == 0:
 			return
-		reply = robot.get_response(msg['Text'])
+		elif chat == 1:
+			reply = robot.get_response_nochat(msg['Text'])
+		elif chat == 2:
+			reply = robot.get_response_chat(msg['Text'])
+		if reply == msg['Text']:
+			return
 		print('robot say:'+reply)
 		return reply
 	#return reply or defaultReply

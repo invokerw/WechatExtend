@@ -5,20 +5,30 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf8")
 
-KEY = '2b76b9f122b44d978a11c459e4b1e4dd'#'8edce3ce905a4c1dbb965e6b35c3834d'
+KEY = '2b76b9f122b44d978a11c459e4b1e4dd'  #聊天开启
+KEY1 = '7e31086f308e400c937b644c5a974a2e'  #聊天关闭
+#'8edce3ce905a4c1dbb965e6b35c3834d'
 
-def get_response(msg):
+def get_response(msg,key):
     apiUrl = 'http://www.tuling123.com/openapi/api'
     data = {
-        'key'    : KEY,
+        'key'    : key,
         'info'   : msg,
         'userid' : 'wechat-robot',
     }
     try:
         r = requests.post(apiUrl, data=data).json()
-        return r.get('text').encode('utf-8')
+
+        if r.get('code').encode('utf-8') == '200000':
+            return r.get('text').encode('utf-8') + "戳-->"+ r.get('url').encode('utf-8')
+        else : 
+            return r.get('text').encode('utf-8')
     except:
         return
+def get_response_nochat(msg):
+	return get_response(msg, KEY1)
+def get_response_chat(msg):
+	return get_response(msg, KEY)
 
 def main():
 	reply = get_response("113")
