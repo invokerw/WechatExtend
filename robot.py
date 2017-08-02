@@ -19,19 +19,20 @@ def get_response(msg,key):
     try:
         r = requests.post(apiUrl, data=data).json()
 
-        if r.get('code').encode('utf-8') == '200000':
+        if r.get('code') == 200000:
             return r.get('text').encode('utf-8') + "戳-->"+ r.get('url').encode('utf-8')
         else : 
             return r.get('text').encode('utf-8')
     except:
-        return
+        return "机器人抛了个异常..."
 def get_response_nochat(msg):
 	return get_response(msg, KEY1)
 def get_response_chat(msg):
 	return get_response(msg, KEY)
 
 def main():
-	reply = get_response("113")
+	reply = get_response_nochat("图片")
+	#reply = get_response_nochat("你是")
 	print('say:' + reply)
 
 

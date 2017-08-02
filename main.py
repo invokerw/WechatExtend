@@ -31,7 +31,7 @@ def ret_chatroom(msg):
 		reply = '切换至提问模式'
 		chat = 1
 		return reply
-	elif msg['Text'].encode('utf-8') == "开启聊天":
+	elif msg['Text'].encode('utf-8') == "聊天模式":
 		reply = '切换至聊天模式'
 		chat = 2
 		return reply
