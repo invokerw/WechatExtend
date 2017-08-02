@@ -20,7 +20,7 @@ def get_response(msg,key):
         r = requests.post(apiUrl, data=data).json()
 
         if r.get('code') == 200000:
-            return r.get('text').encode('utf-8') + "戳-->"+ r.get('url').encode('utf-8')
+            return r.get('text').encode('utf-8') + "...戳-->"+ r.get('url').encode('utf-8')
         else : 
             return r.get('text').encode('utf-8')
     except:
