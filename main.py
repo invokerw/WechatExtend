@@ -69,12 +69,14 @@ def ret_chatroom(msg):
 	elif msg['Text'].encode('utf-8') == "查看撤回":
 		# global retract
 		global retract_list
+		print len(retract_list)
+		print retract_list
 		if len(retract_list) == 0 or  msg_from != "输入不能为空":
 			reply = "查看不到，实现不了 >.<"
 		else :
 			reply = ""
 			for x in range(len(retract_list)):
-				reply = reply + retract_list.pop() + "; \n"
+				reply = reply + retract_list.pop() + " ...\n"
 		return reply
 	else:
 		if chat == 0:
@@ -100,7 +102,7 @@ def send_msg_helper(msg):
 		# global retract 
 		global retract_list
 		# retract = msg_body
-		retract_list.inset(0, msg_body)
+		retract_list.insert(0, msg_body)
 		if len(retract_list) >= 100:
 			retract_list = retract_list[0:100]
 
