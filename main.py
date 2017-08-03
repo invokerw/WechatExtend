@@ -76,7 +76,7 @@ def ret_chatroom(msg):
 		else :
 			reply = ""
 			for x in range(len(retract_list)):
-				reply = reply + retract_list.pop() + " ...\n"
+				reply = reply + retract_list.pop() + " \n"
 		return reply
 	else:
 		if chat == 0:
@@ -97,7 +97,7 @@ def send_msg_helper(msg):
 	if re.search(r"\<\!\[CDATA\[.*撤回了一条消息\]\]\>", msg['Content'].encode('utf8')) is not None:
 		old_msg_id = re.search("\<msgid\>(.*?)\<\/msgid\>", msg['Content']).group(1)
 		old_msg = msg_dict.get(old_msg_id, {})
-		msg_body = old_msg.get('msg_from') + "->撤回:" + old_msg.get('msg_content')
+		msg_body = old_msg.get('msg_from') + " : " + old_msg.get('msg_content')
 		msg_dict.pop(old_msg_id)
 		# global retract 
 		global retract_list
