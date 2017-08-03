@@ -12,7 +12,8 @@ sys.setdefaultencoding("utf8")
 #聊天模式
 chat = 0
 #撤回的消息
-retract = ""
+# retract = ""
+retract_list = []
 #撤回字典
 msg_dict = {}
 
@@ -37,6 +38,7 @@ def ret_chatroom(msg):
 	#回复
 	reply = ""
 	global chat
+	
 	defaultReply = 'I received:'+msg['Text'].encode('utf-8')
 	if msg['Text'].encode('utf-8') == "天气":
 		reply = getweather.get_weather(101010100)
@@ -52,24 +54,27 @@ def ret_chatroom(msg):
 		return reply
 	elif msg['Text'].encode('utf-8') == "提问":
 		if chat != 1:
-			reply = '切换至提问模式'
+			reply = '爸爸们要问什么呀~'
 		else:
-			reply = '现在就是提问模式 >.<'
+			reply = '我听着呢 >.<'
 		chat = 1
 		return reply
 	elif msg['Text'].encode('utf-8') == "陪聊":
 		if chat != 2:
-			reply = '切换至聊天模式'
+			reply = '嘤嘤婴~主人我来啦~'
 		else:
-			reply = '现在就是聊天模式 >.<'
+			reply = '我在这呢 >.<'
 		chat = 2
 		return reply
 	elif msg['Text'].encode('utf-8') == "查看撤回":
-		global retract 
-		if retract == "" or  msg_from != "输入不能为空":
+		# global retract
+		global retract_list
+		if len(retract_list) == 0 or  msg_from != "输入不能为空":
 			reply = "查看不到，实现不了 >.<"
 		else :
-			reply = retract
+			reply = ""
+			for x in range(len(retract_list)):
+				reply = reply + retract_list.pop() + "; \n"
 		return reply
 	else:
 		if chat == 0:
@@ -92,8 +97,12 @@ def send_msg_helper(msg):
 		old_msg = msg_dict.get(old_msg_id, {})
 		msg_body = old_msg.get('msg_from') + "->撤回:" + old_msg.get('msg_content')
 		msg_dict.pop(old_msg_id)
-		global retract 
-		retract = msg_body
+		# global retract 
+		global retract_list
+		# retract = msg_body
+		retract_list.inset(0, msg_body)
+		if len(retract_list) >= 100:
+			retract_list = retract_list[0:100]
 
 
 def main():
