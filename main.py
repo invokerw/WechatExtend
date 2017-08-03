@@ -44,15 +44,24 @@ def ret_chatroom(msg):
 		print('I say:'+reply)
 		return reply
 	elif msg['Text'].encode('utf-8') == "闭嘴":
-		reply = '好的,我闭嘴'
+		if chat != 0:
+			reply = '好的,我闭嘴'
+		else:
+			reply = '早就闭嘴了还要我怎样 >.<'
 		chat = 0
 		return reply
-	elif msg['Text'].encode('utf-8') == "提问模式":
-		reply = '切换至提问模式'
+	elif msg['Text'].encode('utf-8') == "提问":
+		if chat != 1:
+			reply = '切换至提问模式'
+		else:
+			reply = '现在就是提问模式 >.<'
 		chat = 1
 		return reply
-	elif msg['Text'].encode('utf-8') == "聊天模式":
-		reply = '切换至聊天模式'
+	elif msg['Text'].encode('utf-8') == "陪聊":
+		if chat != 2:
+			reply = '切换至聊天模式'
+		else:
+			reply = '现在就是聊天模式 >.<'
 		chat = 2
 		return reply
 	elif msg['Text'].encode('utf-8') == "查看撤回":
