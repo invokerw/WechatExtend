@@ -71,7 +71,7 @@ def ret_chatroom(msg):
 		global retract_list
 		print len(retract_list)
 		print retract_list
-		if len(retract_list) == 0 or  msg_from != "输入不能为空":
+		if len(retract_list) == 0 :#or  msg_from != "输入不能为空":
 			reply = "查看不到，实现不了 >.<"
 		else :
 			reply = ""
