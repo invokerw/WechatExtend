@@ -43,7 +43,7 @@ def ret_chatroom(msg):
 		reply = reply + "...|..." +getweather.get_weather(101020100)
 		print('I say:'+reply)
 		return reply
-	elif msg['Text'].encode('utf-8') == "关闭回复":
+	elif msg['Text'].encode('utf-8') == "闭嘴":
 		reply = '好的,我闭嘴'
 		chat = 0
 		return reply
